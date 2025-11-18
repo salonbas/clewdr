@@ -1,0 +1,15 @@
+{
+  "test_summary": {
+    "total": 13,
+    "passed": 0,
+    "failed": 13,
+    "success_rate": 0,
+    "timestamp": "2025-11-18T05:01:29Z"
+  },
+  "server_info": {
+    "base_url": "http://127.0.0.1:8484",
+    "native_path": "/v1/v1beta/models/gemini-2.5-pro-exp:generateContent",
+    "oai_endpoint": "/gemini/chat/completions"
+  },
+  "model": "models/gemini-2.5-pro-exp"
+}

@@ -1,0 +1,85 @@
+{
+  "// 基礎配置": "",
+  "APIKEY": "your-secret-key",
+  "PORT": 3456,
+  "HOST": "127.0.0.1",
+  "LOG": true,
+  "LOG_LEVEL": "debug",
+  "API_TIMEOUT_MS": 60000,
+
+  "// 註冊自訂 Transformer": "Clewdr 需要 transformer 來處理工具調用格式",
+  "transformers": [
+    {
+      "path": "~/.claude-code-router/plugins/clewdr-transformer.js"
+    }
+  ],
+
+  "// Provider 配置": "配置 Gemini 和 Clewdr 兩個 provider",
+  "Providers": [
+    {
+      "// Gemini Provider": "直接使用 Gemini API，使用內建的 gemini transformer",
+      "name": "gemini",
+      "api_base_url": "https://generativelanguage.googleapis.com/v1beta/models/",
+      "api_key": "your-gemini-api-key",
+      "models": [
+        "gemini-2.0-flash-exp",
+        "gemini-2.5-pro",
+        "gemini-1.5-pro"
+      ],
+      "transformer": {
+        "use": ["gemini"]
+      }
+    },
+    {
+      "// Clewdr Provider": "通過 Clewdr 使用 Claude 模型，需要 clewdr transformer",
+      "name": "clewdr",
+      "api_base_url": "http://127.0.0.1:8484/v1/chat/completions",
+      "api_key": "k9rZeLu6tEHA9jQx43TkyUBTXP6NN2SuYVDtgkUxK5bTfUveCWm3BYnQPt4Br6zR",
+      "models": [
+        "claude-3-haiku-20240307",
+        "claude-3-5-sonnet-20241022",
+        "claude-3-opus-20240229",
+        "claude-sonnet-4-20250514"
+      ],
+      "transformer": {
+        "use": ["clewdr"]
+      }
+    },
+    {
+      "// Clewdr Gemini 模式": "通過 Clewdr 使用 Gemini（如果需要）",
+      "name": "clewdr-gemini",
+      "api_base_url": "http://127.0.0.1:8484/gemini/chat/completions",
+      "api_key": "k9rZeLu6tEHA9jQx43TkyUBTXP6NN2SuYVDtgkUxK5bTfUveCWm3BYnQPt4Br6zR",
+      "models": [
+        "gemini-2.0-flash-exp",
+        "gemini-2.5-pro"
+      ],
+      "transformer": {
+        "use": ["clewdr"]
+      }
+    }
+  ],
+
+  "// Router 配置": "根據不同場景路由到不同的 provider",
+  "Router": {
+    "// 默認使用 Clewdr 的 Claude": "",
+    "default": "clewdr,claude-3-5-sonnet-20241022",
+    
+    "// 後台任務使用 Gemini（更快更便宜）": "",
+    "background": "gemini,gemini-2.0-flash-exp",
+    
+    "// 思考任務使用 Clewdr 的 Claude": "",
+    "think": "clewdr,claude-3-5-sonnet-20241022",
+    
+    "// 長上下文使用 Clewdr 的 Claude": "",
+    "longContext": "clewdr,claude-3-opus-20240229",
+    "longContextThreshold": 60000,
+    
+    "// 圖片任務使用 Gemini": "",
+    "image": "gemini,gemini-2.5-pro"
+  },
+
+  "// 自訂 Router（可選）": "如果需要更複雜的路由邏輯",
+  "CUSTOM_ROUTER_PATH": "~/.claude-code-router/custom-router.js"
+}
+

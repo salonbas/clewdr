@@ -1,0 +1,15 @@
+{
+  "test_summary": {
+    "total": 4,
+    "available": 4,
+    "unavailable": 0,
+    "success_rate": 100,
+    "timestamp": "2025-11-18T11:24:04Z"
+  },
+  "server_info": {
+    "base_url": "http://127.0.0.1:8484",
+    "endpoint": "/v1/chat/completions"
+  },
+  "available_models": ["Claude Sonnet 4.5 (2025-09-29) (claude-sonnet-4-5-20250929)","Claude Haiku 4.5 (2025-10-01) (claude-haiku-4-5-20251001)","Claude Opus 4.1 (2025-08-05) (claude-opus-4-1-20250805)","Claude Sonnet 4.5 (2025-05-14 控制組) (claude-sonnet-4-5-20250514)"],
+  "unavailable_models": []
+}
